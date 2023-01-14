@@ -1,57 +1,67 @@
 Feature: Batch Requests
 
   Scenario Outline: Get All batches
-    Given Get call to <URI>
-    Then Response is <statusCode>
+    Given A Service with LMS API
+    When Get request to <URI>
+    Then Validate response code <statusCode>
 
     Examples: 
       | URI          | statusCode |
       | /allPrograms |        200 |
 
   Scenario Outline: Get Batches By Id
-    Given Get call to <URI>
-    Then Response is <statusCode>
+    Given A Service with LMS API
+    When Get request to <URI>
+    Then Validate response code <statusCode>
+    And Validate batch Id is displayed as <batchId>
 
     Examples: 
-      | URI                  | statusCode |
-      | /batches/batchId/483 |        200 |
+      | URI                  | statusCode | batchId |
+      | /batches/batchId/588 |        200 |     588 |
 
   Scenario Outline: Get Batches By Batch Name
-    Given Get call to <URI>
-    Then Response is <statusCode>
+    Given A Service with LMS API
+    When Get request to <URI>
+    Then Validate response code <statusCode>
+    And Validate batch Name is displayed as <batchName>
 
     Examples: 
-      | URI                                 | statusCode |
-      | /batches/batchName/SDET NinjaSparks |        200 |
+      | URI                                          | statusCode | batchName                 |
+      | /batches/batchName/Jan23-NinjaSpark-SDET-001 |        200 | Jan23-NinjaSpark-SDET-001 |
 
   Scenario Outline: Get Batches By Program Id
-    Given Get call to <URI>
-    Then Response is <statusCode>
+    Given A Service with LMS API
+    When Get request to <URI>
+    Then Validate response code <statusCode>
+    And Validate Program Id is displayed as <programId>
 
     Examples: 
-      | URI                  | statusCode |
-      | /batches/program/307 |        200 |
+      | URI                   | statusCode | programId |
+      | /batches/program/1447 |        200 |      1447 |
 
   Scenario Outline: Cretae Batch
-    Given post request to <URI>
-    Then Response is <statusCode>
+    Given A Service with LMS API
+    When post request to <URI>
+    Then Validate response code <statusCode>
 
     Examples: 
       | URI      | statusCode |
       | /batches |        201 |
 
   Scenario Outline: Update Batch By Id
-    Given put request to <URI>
-    Then Response is <statusCode>
+    Given A Service with LMS API
+    When put request to <URI>
+    Then Validate response code <statusCode>
+
+    Examples: 
+      | URI                  | statusCode |
+      | /batches/batchId/588 |        200 |
+
+  Scenario Outline: Delete Batch By Id
+    Given A Service with LMS API
+    When Delete request to <URI>
+    Then Validate response code <statusCode>
 
     Examples: 
       | URI          | statusCode |
-      | /batches/495 |        200 |
-      
-       Scenario Outline: Delete Batch By Id
-    Given Delete request to <URI>
-    Then Response is <statusCode>
-
-    Examples: 
-      | URI          | statusCode |
-      | /batches/495 |        200 |
+      | /batches/225 |        200 |
