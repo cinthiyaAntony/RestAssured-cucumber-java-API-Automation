@@ -1,21 +1,21 @@
 package utils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
-import cucumber.api.cli.Main;
 
 public class RestUtil {
 
 	public static String batchName() {
-		String generateString = RandomStringUtils.randomNumeric(3);
-		return ("Jan23-NinjaSpark-SDET-SDET01-"+generateString);		
+		return String.format("%s%s-%s-%s-%s", 
+				ZonedDateTime.now().getDayOfMonth(), 
+				new DateFormatSymbols().getShortMonths()[ZonedDateTime.now().getMonth().getValue()-1],
+				"NinjaSpark",
+				"SDET",RandomStringUtils.randomNumeric(3));
 	}
-
+	
 	public static String batchNoOfClasses() {
 		String generateString = RandomStringUtils.randomNumeric(2);
 		return (generateString);		
@@ -28,8 +28,11 @@ public class RestUtil {
 
 
 	public static String programName() {
-		String generateString = RandomStringUtils.randomNumeric(3);
-		return ("Jan23-NinjaSpark-SDET-SDET01-"+generateString);		
+		return String.format("%s%s-%s-%s-%s", 
+				ZonedDateTime.now().getDayOfMonth(), 
+				new DateFormatSymbols().getShortMonths()[ZonedDateTime.now().getMonth().getValue()-1],
+				"NinjaSpark",
+				"SDET",RandomStringUtils.randomNumeric(3));
 	}
 
 	public static String programDescription() {

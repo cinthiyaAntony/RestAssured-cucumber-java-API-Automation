@@ -25,7 +25,7 @@ Feature: Batch Requests
     Given A Service with LMS API
     When Get request by batch name to "/batches/batchName/"
     Then Validate response code 200
-    And Validate batch Name is displayed as "null"
+    And Validate batch Name is displayed as "value"
 
   Scenario: Get Batches By Program Id
     Given A Service with LMS API
