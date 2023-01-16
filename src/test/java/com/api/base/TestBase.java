@@ -16,7 +16,7 @@ public class TestBase {
 		try {
 			prop = new Properties();
 			FileInputStream ip = new FileInputStream(
-					System.getProperty("user.dir") + "/NinjaSparks_API_Hackathon/Configuration/config.properties");
+					System.getProperty("user.dir") + "/Configuration/config.properties");
 			prop.load(ip);
 
 		} catch (FileNotFoundException e) {

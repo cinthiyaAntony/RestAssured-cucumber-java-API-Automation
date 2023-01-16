@@ -6,7 +6,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class RestUtil {
 
-	public static final String EXCEL = "C:/Users/cinth/eclipse-workspace/restapi/src/test/java/com/testdata/DataExcel.xlsx";
+	public static final String EXCEL = "C:/Users/cinth/eclipse-workspace/NinjaSparks_API_Hackathon/src/test/java/com/api/testdata/DataExcel.xlsx";
 
 	public static String programNameForExcel() {
 		String generateString = RandomStringUtils.randomNumeric(10);
