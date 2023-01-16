@@ -8,8 +8,7 @@ Cucumber can be defined as a testing framework, driven by plain English text.
 
 Convert our Rest Assured API Tests to the Cucumber BDD Style Test.
 
-
-#Required Setup:
+Required Setup:
 
 Java should be installed and configured.
 Maven should be installed and configured.
