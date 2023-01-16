@@ -78,7 +78,6 @@ public class ProgramStepDefinition extends TestBase {
 			// System.out.println("scenario 1 is sucess");
 
 		} else {
-			// System.out.println("Not Found: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 404);
 			log.info("Resend the Same Request again");
 			log.error("Not Found: 404");
@@ -119,7 +118,6 @@ public class ProgramStepDefinition extends TestBase {
 			System.out.println(NewprogramName_1);
 		}
 		log.info("All required details send  ");
-
 	}
 
 	@Then("User should get status code {string}")
@@ -178,23 +176,12 @@ public class ProgramStepDefinition extends TestBase {
 		}
 	}
 
-	// GET PROGRAM By ID ViewSingleProgramId
+	// GET PROGRAM By ID
 	@When("User sends GET request for single Programid data")
 	public void user_sends_GET_request_for_single_Programid_data() throws InvalidFormatException, IOException {
 		String endPoint = "/programs/";
 		uri = baseURL + endPoint;
 		String path = uri + NewprogramID;
-		// System.out.println(path);
-		response = given().when().get(path).then().log().all().extract().response();
-		log.info("GET request with endpoint: " + path);
-	}
-
-	// GETProgramName
-	@When("User sends GET request for single ProgramName data")
-	public void user_sends_GET_request_for_single_ProgramName_data() throws InvalidFormatException, IOException {
-		String endPoint = "/programs/";
-		uri = baseURL + endPoint;
-		String path = uri + NewprogramName;
 		response = given().when().get(path).then().log().all().extract().response();
 		log.info("GET request with endpoint: " + path);
 	}
@@ -204,7 +191,6 @@ public class ProgramStepDefinition extends TestBase {
 		final int StatusCodeUser = response.getStatusCode();
 		if (StatusCodeUser == 200) {
 			response.then().statusCode(Integer.parseInt(statusCode));
-			// System.out.println("Successful Status Code: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 200);
 			log.info("Get programbyId StatusCode: 200");
 		} else {
@@ -243,16 +229,15 @@ public class ProgramStepDefinition extends TestBase {
 	@When("User sends put request to {string} byName {string} and {int}")
 	public void user_sends_put_request_to_byName_and(String URI, final String SheetName, final Integer Rownumber)
 			throws InvalidFormatException, IOException {
-		this.uri = baseURL + URI + NewprogramName;
+		this.uri = baseURL + URI + NewprogramName_1;
 		log.info("PUT request with endpoint: " + this.uri);
 		final ExcelReader excelReader = new ExcelReader();
 		final List<Map<String, String>> putData = excelReader.getData(RestUtil.EXCEL, SheetName);
-		// final String name = putData.get(Rownumber).get("programName");
+		final String name = putData.get(Rownumber).get("programName");
 		final String description = putData.get(Rownumber).get("programDescription");
 		final String status = putData.get(Rownumber).get("programStatus");
 		JSONObject body = new JSONObject();
-		// body.put("programName", name);
-		body.put("programId", NewprogramID);
+		body.put("programName", name);
 		body.put("programDescription", description);
 		body.put("programStatus", status);
 		body.put("creationTime", currentTime);
@@ -272,7 +257,7 @@ public class ProgramStepDefinition extends TestBase {
 		} else {
 			log.info("Bad request: 400");
 			// System.out.println("Response received successfully: " + StatusCodeUser);
-			Assert.assertEquals(StatusCodeUser, 400);
+			Assert.assertTrue(false);
 		}
 	}
 
@@ -304,7 +289,6 @@ public class ProgramStepDefinition extends TestBase {
 		} else {
 			log.error("DELETE Request not successful: 400");
 			Assert.assertTrue(false);
-
 		}
 	}
 

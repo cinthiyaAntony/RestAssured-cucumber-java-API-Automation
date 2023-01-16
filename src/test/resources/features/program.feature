@@ -34,19 +34,13 @@ Feature: Program Feature
       | SheetName | Rownumber |
       | postdata  |         0 |
 
-  @ViewSingleProgramId
+  @GETProgramId
   Scenario: Verify  can send get request to retrieve single Program dara
     Given User sets request with authorization
     When User sends GET request for single Programid data
     Then User should get status code "200" for getProgramId and Name
 
-  @ViewSingleProgramNAME
-  Scenario: Verify  can send get request to retrieve single Program dara
-    Given User sets request with authorization
-    When User sends GET request for single ProgramName data
-    Then User should get status code "200" for getProgramId and Name
 
-  
   @UpdateProgramById
   Scenario Outline: Get Batches By Program Id
   Given User sets request with authorization
