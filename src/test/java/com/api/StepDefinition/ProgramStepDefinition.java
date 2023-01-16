@@ -29,7 +29,6 @@ import io.restassured.specification.RequestSpecification;
 public class ProgramStepDefinition extends TestBase {
 
 	String baseURL = prop.getProperty("baseurl");
-	// String configExcel = prop.getProperty("excel");
 	String uri;
 	static String NewprogramName;
 	static int NewprogramID;
@@ -50,6 +49,7 @@ public class ProgramStepDefinition extends TestBase {
 		this.uri = baseURL;
 		this.request = RestAssured.given() // .auth().preemptive().basic(ApiConfig.USERNAME, ApiConfig.PASSWORD)
 				.header("Content-Type", "application/json");
+		log.info("user sends request with BaseURL");
 	}
 
 	@When("User sends GET request {string}")
@@ -57,6 +57,7 @@ public class ProgramStepDefinition extends TestBase {
 		this.uri = baseURL + URI;
 		response = this.request.get(this.uri);
 		response.then().log().all();
+		log.info("User sends request with endpoint" + URI);
 	}
 
 	@Then("User should get status code {string}, valid response body and json schema validated for successful GET request")
@@ -73,11 +74,14 @@ public class ProgramStepDefinition extends TestBase {
 							.matchesJsonSchema(new File("src/test/resources/JsonSchemaUser/allprogram.json")))
 					.log().all();
 			Assert.assertEquals(StatusCodeUser, 200);
-			System.out.println("scenario 1 is sucess");
+			log.info("Get validation code of GetAllProgram: 200");
+			// System.out.println("scenario 1 is sucess");
 
 		} else {
-			System.out.println("Not Found: " + StatusCodeUser);
+			// System.out.println("Not Found: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 404);
+			log.info("Resend the Same Request again");
+			log.error("Not Found: 404");
 		}
 	}
 
@@ -87,7 +91,7 @@ public class ProgramStepDefinition extends TestBase {
 	public void user_sends_POST_request_with_data() {
 		String createUser = "/saveprogram";
 		this.uri = baseURL + createUser;
-
+		log.info("POST request with endpoint" + this.uri);
 		final JSONObject body = new JSONObject();
 		body.put("programName", progNa);
 		body.put("programDescription", progDes);
@@ -97,8 +101,9 @@ public class ProgramStepDefinition extends TestBase {
 		response = this.request.body(body.toJSONString()).when().post(this.uri).then().log().all().extract().response();
 		NewprogramName = response.path("programName");
 		NewprogramID = response.path("programId");
-		System.out.println(NewprogramID);
-		System.out.println(NewprogramName);
+		log.info("All required details send  ");
+		// System.out.println(NewprogramID);
+		// System.out.println(NewprogramName);
 
 	}
 
@@ -107,10 +112,12 @@ public class ProgramStepDefinition extends TestBase {
 		final int StatusCodeUser = response.getStatusCode();
 		if (StatusCodeUser == 201) {
 			response.then().statusCode(Integer.parseInt(statusCode));
-			System.out.println("created : " + StatusCodeUser);
+			log.info("Created: 201");
+			// System.out.println("created : " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 201);
 		} else {
-			System.out.println("Bad Request: " + StatusCodeUser);
+			// System.out.println("Bad Request: " + StatusCodeUser);
+			log.error("Bad request: 400");
 			Assert.assertTrue(false);
 		}
 	}
@@ -122,6 +129,7 @@ public class ProgramStepDefinition extends TestBase {
 			throws InvalidFormatException, IOException {
 		String createUser = "/saveprogram";
 		this.uri = baseURL + createUser;
+		log.info("Resend POST request: " + this.uri);
 		final ExcelReader excelReader = new ExcelReader();
 		final List<Map<String, String>> postData = excelReader.getData(RestUtil.EXCEL, SheetName);
 		final String name = postData.get(Rownumber).get("programName");
@@ -133,6 +141,7 @@ public class ProgramStepDefinition extends TestBase {
 		body.put("programStatus", status);
 		body.put("creationTime", currentTime);
 		body.put("lastModTime", lastModTime);
+		log.info("POST same data Using Excel  ");
 		response = this.request.body(body.toJSONString()).when().post(this.uri).then().log().all().extract().response();
 	}
 
@@ -142,12 +151,14 @@ public class ProgramStepDefinition extends TestBase {
 		final int StatusCodeUser = response.getStatusCode();
 		if (StatusCodeUser == 400) {
 			response.then().statusCode(Integer.parseInt(statuscode));
-			System.out.println("Successful Status Code: " + StatusCodeUser);
+			// System.out.println("Successful Status Code: " + StatusCodeUser);
 			Assert.assertEquals(statuscode, "400");
-			System.out.println("Duplicate Entry: " + StatusCodeUser);
-			Assert.assertTrue(true);
+			log.warn("Duplicate Entry: 400");
+			// System.out.println("Duplicate Entry: " + StatusCodeUser);
+			// Assert.assertTrue(true);
 		} else {
-			System.out.println("Not Successful" + StatusCodeUser);
+			log.error("Not Successful: 400");
+			// System.out.println("Not Successful" + StatusCodeUser);
 			Assert.assertTrue(false);
 		}
 	}
@@ -161,6 +172,7 @@ public class ProgramStepDefinition extends TestBase {
 		System.out.println(path);
 		response = given().when().get(path).then().log().all() // .body(body.toJSONString())
 				.extract().response();
+		log.info("GET request with endpoint: " + path);
 	}
 
 	// GETProgramName
@@ -171,7 +183,7 @@ public class ProgramStepDefinition extends TestBase {
 		String path = uri + NewprogramName;
 		response = given().when().get(path).then().log().all() // .body(body.toJSONString())
 				.extract().response();
-
+		log.info("GET request with endpoint: " + path);
 	}
 
 	@Then("User should get status code {string} for getProgramId and Name")
@@ -179,12 +191,12 @@ public class ProgramStepDefinition extends TestBase {
 		final int StatusCodeUser = response.getStatusCode();
 		if (StatusCodeUser == 200) {
 			response.then().statusCode(Integer.parseInt(statusCode));
-			System.out.println("Successful Status Code: " + StatusCodeUser);
-//			response.then().assertThat().body(JsonSchemaValidator
-//					.matchesJsonSchema(new File("src/test/resources/JsonSchemaUser/allprogram.json")));
+			// System.out.println("Successful Status Code: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 200);
+			log.info("Get programbyId StatusCode: 200");
 		} else {
-			System.out.println("Response received successfully: " + StatusCodeUser);
+			log.error("Get programbyId StatusCode: 400");
+			// System.out.println("Response received successfully: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 400);
 		}
 	}
@@ -194,8 +206,8 @@ public class ProgramStepDefinition extends TestBase {
 	@When("User sends put request to {string} and {string} and {int}")
 	public void user_sends_put_request_to_and_and(String URI, final String SheetName, final Integer Rownumber)
 			throws InvalidFormatException, IOException {
-
 		this.uri = baseURL + URI + NewprogramID;
+		log.info("PUT request with endpoint: " + this.uri);
 		final ExcelReader excelReader = new ExcelReader();
 		final List<Map<String, String>> putData = excelReader.getData(RestUtil.EXCEL, SheetName);
 
@@ -210,6 +222,7 @@ public class ProgramStepDefinition extends TestBase {
 		body.put("lastModTime", lastModTime);
 		response = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(body.toJSONString()).when()
 				.put(this.uri);
+
 	}
 
 	@Then("User should get status code update validation {string}")
@@ -217,12 +230,15 @@ public class ProgramStepDefinition extends TestBase {
 		final int StatusCodeUser = response.getStatusCode();
 		if (StatusCodeUser == 200) {
 			response.then().statusCode(Integer.parseInt(statusCode));
-			System.out.println("Successful Status Code: " + StatusCodeUser);
-//			response.then().assertThat().body(JsonSchemaValidator
-//					.matchesJsonSchema(new File("src/test/resources/JsonSchemaUser/allprogram.json")));
+			// System.out.println("Successful Status Code: " + StatusCodeUser);
+			response.then().assertThat().body(JsonSchemaValidator
+					.matchesJsonSchema(new File("src/test/resources/JsonSchemaUser/allprogram.json")));
 			Assert.assertEquals(StatusCodeUser, 200);
+			log.info("Updated sucessfully: 200");
+
 		} else {
-			System.out.println("Response received successfully: " + StatusCodeUser);
+			log.info("Bad request: 200");
+			// System.out.println("Response received successfully: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 400);
 		}
 	}
@@ -231,6 +247,8 @@ public class ProgramStepDefinition extends TestBase {
 	@When("User sends Delete program by id {string}")
 	public void user_sends_Delete_program_by_id(String URI) {
 		this.uri = baseURL + URI + NewprogramID;
+		log.info("DELETE request with endpoint:" + this.uri);
+
 		response = when().delete(this.uri).then().extract().response();
 	}
 
@@ -238,6 +256,7 @@ public class ProgramStepDefinition extends TestBase {
 	@When("User sends Delete program by Name {string}")
 	public void user_sends_Delete_program_by_Name(String URI) {
 		this.uri = baseURL + URI + NewprogramName;
+		log.info("DELETE request with endpoint:" + this.uri);
 		response = when().delete(this.uri).then().extract().response();
 	}
 
@@ -246,14 +265,17 @@ public class ProgramStepDefinition extends TestBase {
 		final int StatusCodeUser = response.getStatusCode();
 		if (StatusCodeUser == 201) {
 			response.then().statusCode(Integer.parseInt(statusCode));
-			System.out.println("created : " + StatusCodeUser);
+			// System.out.println("created : " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 201);
+
 		} else if (StatusCodeUser == 200) {
 			response.then().statusCode(Integer.parseInt(statusCode));
-			System.out.println("Successful Status Code: " + StatusCodeUser);
+			// System.out.println("Successful Status Code: " + StatusCodeUser);
 			Assert.assertEquals(StatusCodeUser, 200);
+			log.info("DELETE Request successful: 200");
 		} else {
-			System.out.println("Bad Request: " + StatusCodeUser);
+			// System.out.println("Bad Request: " + StatusCodeUser);
+			log.error("DELETE Request not successful: " + statusCode);
 			Assert.assertTrue(false);
 
 		}

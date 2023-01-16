@@ -1,7 +1,7 @@
 @LMSApplication
 Feature: Program Feature
 
-  @ViewAllProgram
+  @GAllProgram
   Scenario: Verify can send get request to retrieve all program data
     Given User sets request with authorization
     When User sends GET request "/allPrograms"
