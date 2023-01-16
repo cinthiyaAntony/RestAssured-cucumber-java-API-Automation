@@ -1,4 +1,4 @@
-package com.api.stepdefinition;
+package com.api.StepDefinition;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
@@ -22,7 +22,7 @@ import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-public class BatchStepdefinition extends TestBase{
+public class BatchStepDefinition extends TestBase{
 
 
 	Response response;
@@ -44,6 +44,7 @@ public class BatchStepdefinition extends TestBase{
 	public void a_Service_with_lms_API() {
 		
 		baseURI = baseURL;
+		log.info("user sends request with BaseURL");
 			
 	}
 
@@ -51,6 +52,7 @@ public class BatchStepdefinition extends TestBase{
 	public void get_request_to_view_all_batches(String URI) {
 
 		response = given().when().get(URI);
+		log.info("User sends Get request" + URI);
 	}
 
 
@@ -59,6 +61,7 @@ public class BatchStepdefinition extends TestBase{
 
 		String path = URI +batchID ;
 		response = given().when().get(path);
+		log.info("User sends Get request" + URI);
 	}
 
 	@When("Get request by batch name to {string}")
@@ -66,6 +69,7 @@ public class BatchStepdefinition extends TestBase{
 
 		String path = URI +batchNm ;
 		response = given().when().get(path);
+		log.info("User sends Get request" + URI);
 	}
 
 	@When("Get request by program ID to {string}")
@@ -73,6 +77,7 @@ public class BatchStepdefinition extends TestBase{
 
 		String path = URI + programID;
 		response = given().when().get(path);
+		log.info("User sends Get request" + URI);
 	}
 
 
@@ -80,6 +85,7 @@ public class BatchStepdefinition extends TestBase{
 	public void Validate_response_code(Integer statusCode) {
 
 		response.then().assertThat().statusCode(statusCode).log().all();
+		log.info("User get response" + statusCode);
 
 	}
 
@@ -88,6 +94,7 @@ public class BatchStepdefinition extends TestBase{
 
 		batchId = batchID;
 		response.then().body("batchId",equalTo(batchId));
+		log.info("User get batchID " + batchId);
 
 	}
 
@@ -97,6 +104,7 @@ public class BatchStepdefinition extends TestBase{
 
 		programId = programID;
 		response.then().body("programId",hasItems(programId));
+		log.info("User get program ID " + programId);
 
 	}
 
@@ -105,6 +113,7 @@ public class BatchStepdefinition extends TestBase{
 
 		batchName=batchNm;
 		response.then().body("batchName",hasItems(batchName));
+		log.info("User get batch name " + batchName);
 
 	}
 
@@ -127,6 +136,8 @@ public class BatchStepdefinition extends TestBase{
 
 		programName = response.path("programName");
 		programID = response.path("programId");
+		
+		log.info("All required details send  ");
 
 	}
 
@@ -153,6 +164,8 @@ public class BatchStepdefinition extends TestBase{
 		batchNm = response.path("batchName");
 		batchDescrtn = response.path("batchDescription");
 		batchNoClass = response.path("batchNoOfClasses");
+		
+		log.info("All required details send  ");
 	}
 	
 	@When("post request to create duplicate batch {string}")
@@ -171,6 +184,9 @@ public class BatchStepdefinition extends TestBase{
 				accept(ContentType.JSON).
 				body(request.toJSONString()).
 				when().post(URI);
+		
+		log.warn("Duplicate Entry: 400");
+		log.info("Duplicate entry error message  ");
 
 	}
 
@@ -194,6 +210,8 @@ public class BatchStepdefinition extends TestBase{
 				accept(ContentType.JSON).
 				body(request.toJSONString()).
 				when().put(path);
+		
+		log.info("All required details send  ");
 
 	}
 
@@ -203,6 +221,7 @@ public class BatchStepdefinition extends TestBase{
 		String path = URI +batchID ;
 		response = when().
 				delete(path);
+		log.info("DELETE Request successful: 200");
 	}
 	
 	@When("Delete already deleted batch request to {string}")
@@ -211,6 +230,7 @@ public class BatchStepdefinition extends TestBase{
 		String path = URI +batchID ;
 		response = when().
 				delete(path);
+		log.info("entity not present ");
 	}
 
 	@When("Delete program request to {string}")
@@ -219,6 +239,7 @@ public class BatchStepdefinition extends TestBase{
 		String path = URI +programName ;
 		response = when().
 				delete(path);
+		log.info("DELETE Request successful: 200");
 	}
 
 

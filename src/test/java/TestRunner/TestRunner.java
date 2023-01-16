@@ -1,4 +1,4 @@
-package com.api.test;
+package TestRunner;
 
 import org.junit.runner.RunWith;
 
@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 
 
 @CucumberOptions(features ={"src/test/resources/features"}, 
-glue = {"com.api.stepdefinition"}, 
+glue = {"com.api.StepDefinition"}, 
 monochrome = true, 
 plugin = {"pretty",
 		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

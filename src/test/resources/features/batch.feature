@@ -58,7 +58,7 @@ Feature: Batch Requests
     Then Validate response code 200
     
     @DeleteSameBatchByID
-  Scenario: Delete Batch By Id
+  Scenario: Delete Batch By already deleted  Id
     Given A Service with LMS API
     When Delete already deleted batch request to "/batches/"
     Then Validate response code 400
