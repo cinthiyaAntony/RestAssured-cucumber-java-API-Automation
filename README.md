@@ -28,3 +28,5 @@ Open the command prompt and navigate to the folder in which pom.xml file is pres
 
 mvn clean test
 
+Logs:
+log/myLog.log
