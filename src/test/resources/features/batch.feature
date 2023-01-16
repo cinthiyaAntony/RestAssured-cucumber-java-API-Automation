@@ -3,20 +3,26 @@ Feature: Batch Requests
   @ViewAllBatch
   Scenario: Verify can send get request to retrieve all Batch data
     Given A Service with LMS API
-    When Get request to "/allPrograms"
+    When Get request to view all batches "/batches"
     Then Validate response code 200
 
   @CreateNewProgram
   Scenario: Cretae new Program for Batch
     Given A Service with LMS API
-    When post request for program to "/saveprogram"
+    When post request to create program "/saveprogram"
     Then Validate response code 201
 
   @CreateNewBatch
   Scenario: Cretae Batch
     Given A Service with LMS API
-    When post request to "/batches"
+    When post request to create batch "/batches"
     Then Validate response code 201
+    
+      @CreateDuplicateBatch
+  Scenario: Cretae duplicate Batch
+    Given A Service with LMS API
+    When post request to create duplicate batch "/batches"
+    Then Validate response code 400
 
   @ViewBatchByID
   Scenario: Get Batches By Id
@@ -42,14 +48,20 @@ Feature: Batch Requests
   @UpdateBatchByID
   Scenario: Update Batch By Id
     Given A Service with LMS API
-    When put request to "/batches/"
+    When put request to update batch data "/batches/batchId/"
     Then Validate response code 200
 
   @DeleteBatchByID
   Scenario: Delete Batch By Id
     Given A Service with LMS API
-    When Delete request to "/batches/"
+    When Delete batch request to "/batches/"
     Then Validate response code 200
+    
+    @DeleteSameBatchByID
+  Scenario: Delete Batch By Id
+    Given A Service with LMS API
+    When Delete already deleted batch request to "/batches/"
+    Then Validate response code 400
 
   @DeleteProgramByName
   Scenario: Delete Program by name

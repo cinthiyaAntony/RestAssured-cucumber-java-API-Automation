@@ -28,13 +28,14 @@ public class BatchStepdefinition extends TestBase{
 	Response response;
 	static Integer batchID;
 	static String batchNm;
+	static String batchDescrtn;
 	static Integer programID;
-	static Integer NewprogramID;
+	static Integer batchNoClass;
 	static String programName;
 	String batchname = RestUtil.batchName();
 	String batchDescription = RestUtil.batchDescription();
 	String batchNoOfClasses = RestUtil.batchNoOfClasses();
-	String NewprogramName = RestUtil.programName();
+	String NewprogramNm = RestUtil.programName();
 	String programDescription = RestUtil.programDescription();
 	String dateAndTime = RestUtil.getDateTime();
 	String baseURL = prop.getProperty("baseurl");
@@ -46,8 +47,8 @@ public class BatchStepdefinition extends TestBase{
 			
 	}
 
-	@When("Get request to {string}")
-	public void get_request_to(String URI) {
+	@When("Get request to view all batches {string}")
+	public void get_request_to_view_all_batches(String URI) {
 
 		response = given().when().get(URI);
 	}
@@ -70,7 +71,7 @@ public class BatchStepdefinition extends TestBase{
 	@When("Get request by program ID to {string}")
 	public void get_request_by_program_ID_to(String URI) {
 
-		String path = URI + NewprogramID;
+		String path = URI + programID;
 		response = given().when().get(path);
 	}
 
@@ -94,7 +95,7 @@ public class BatchStepdefinition extends TestBase{
 	public void Validate_Program_Id_is_displayed(Integer programId) {
 
 
-		programId = NewprogramID;
+		programId = programID;
 		response.then().body("programId",hasItems(programId));
 
 	}
@@ -107,12 +108,12 @@ public class BatchStepdefinition extends TestBase{
 
 	}
 
-	@When("post request for program to {string}")
-	public void post_request_for_program_to(String URI) {
+	@When("post request to create program {string}")
+	public void post_request_to_create_program(String URI) {
 
 		JSONObject request = new JSONObject();
 
-		request.put("programName",NewprogramName);
+		request.put("programName",NewprogramNm);
 		request.put("programDescription",programDescription);
 		request.put("programStatus","Active");
 		request.put("creationTime",dateAndTime);
@@ -125,22 +126,22 @@ public class BatchStepdefinition extends TestBase{
 				when().post(URI);
 
 		programName = response.path("programName");
-		NewprogramID = response.path("programId");
+		programID = response.path("programId");
 
 	}
 
 
 
-	@When("post request to {string}")
-	public void post_request_to(String URI) {
+	@When("post request to create batch {string}")
+	public void post_request_to_create_batch(String URI) {
 
 		JSONObject request = new JSONObject();
 
 		request.put("batchName",batchname);
 		request.put("batchDescription",batchDescription);
 		request.put("batchStatus","Active");
-		request.put("batchNoOfClasses",10);
-		request.put("programId",NewprogramID);
+		request.put("batchNoOfClasses",batchNoOfClasses);
+		request.put("programId",programID);
 
 		response = given().
 				contentType(ContentType.JSON).
@@ -150,11 +151,32 @@ public class BatchStepdefinition extends TestBase{
 
 		batchID = response.path("batchId");
 		batchNm = response.path("batchName");
+		batchDescrtn = response.path("batchDescription");
+		batchNoClass = response.path("batchNoOfClasses");
+	}
+	
+	@When("post request to create duplicate batch {string}")
+	public void post_request_to_create_duplicate_batch(String URI) {
+
+		JSONObject request = new JSONObject();
+
+		request.put("batchName",batchNm);
+		request.put("batchDescription",batchDescrtn);
+		request.put("batchStatus","Active");
+		request.put("batchNoOfClasses",batchNoClass);
+		request.put("programId",programID);
+
+		response = given().
+				contentType(ContentType.JSON).
+				accept(ContentType.JSON).
+				body(request.toJSONString()).
+				when().post(URI);
+
 	}
 
 
-	@When("put request to {string}")
-	public void put_request_to_batches_batchId(String URI) {
+	@When("put request to update batch data {string}")
+	public void put_request_to_update_batche_data(String URI) {
 
 
 		JSONObject request = new JSONObject();
@@ -163,7 +185,7 @@ public class BatchStepdefinition extends TestBase{
 		request.put("batchDescription",batchDescription);
 		request.put("batchStatus","Active");
 		request.put("batchNoOfClasses",batchNoOfClasses);
-		request.put("programId",NewprogramID);
+		request.put("programId",programID);
 		request.put("programId",programName);
 
 		String path = URI +batchID ;
@@ -171,12 +193,20 @@ public class BatchStepdefinition extends TestBase{
 				contentType(ContentType.JSON).
 				accept(ContentType.JSON).
 				body(request.toJSONString()).
-				when().patch(path);
+				when().put(path);
 
 	}
 
-	@When("Delete request to {string}")
-	public void delete_request_to(String URI) {	
+	@When("Delete batch request to {string}")
+	public void delete_batch_request_to(String URI) {	
+
+		String path = URI +batchID ;
+		response = when().
+				delete(path);
+	}
+	
+	@When("Delete already deleted batch request to {string}")
+	public void delete_already_deleted_batch_request_to(String URI) {	
 
 		String path = URI +batchID ;
 		response = when().
