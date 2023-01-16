@@ -55,7 +55,19 @@ Feature: Program Feature
   
   Examples:
   | SheetName   | Rownumber |
-  | putdata     |         1 |
+  | putdataId   |         0 |
+  
+  @UpdateProgramByName
+  Scenario Outline: Get Batches By Program Name
+  Given User sets request with authorization
+  When User sends put request to "/putprogram/" byName "<SheetName>" and <Rownumber>
+  Then User should get status code update validation "200"
+  
+  Examples:
+  | SheetName   | Rownumber |
+  | putdataName |         0 |
+  
+  
   @DeleteProgramById
   Scenario: Delete Program By Id
     Given User sets request with authorization
