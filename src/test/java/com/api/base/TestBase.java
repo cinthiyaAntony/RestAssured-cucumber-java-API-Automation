@@ -9,10 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class TestBase {
+
 	public static Properties prop;
 	public static Logger log = LogManager.getLogger();
 
 	public TestBase() {
+
 		try {
 			prop = new Properties();
 			FileInputStream ip = new FileInputStream(
@@ -23,6 +25,8 @@ public class TestBase {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+
 		}
 	}
+
 }
