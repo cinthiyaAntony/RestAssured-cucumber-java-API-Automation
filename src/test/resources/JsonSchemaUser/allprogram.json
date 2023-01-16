@@ -1,0 +1,417 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "array",
+    "default": [],
+    "title": "Root Schema",
+    "items": {
+        "type": "object",
+        "title": "A Schema",
+        "required": [
+            "programId",
+            "programName",
+            "programDescription",
+            "programStatus",
+            "creationTime",
+            "lastModTime"
+        ],
+        "properties": {
+            "programId": {
+                "type": "integer",
+                "title": "The programId Schema",
+                "examples": [
+                    920,
+                    323,
+                    2286,
+                    2287,
+                    164,
+                    2365,
+                    2366,
+                    1736,
+                    1951,
+                    2441,
+                    1954,
+                    2443,
+                    1604,
+                    2448,
+                    1964,
+                    908,
+                    1959
+                ]
+            },
+            "programName": {
+                "type": "string",
+                "title": "The programName Schema",
+                "examples": [
+                    "Jan23-KP6",
+                    "camden.biz",
+                    "pghalle.net",
+                    "pgalysha.org",
+                    "pgfrederique.org",
+                    "Jan23-NinjaTrainees-SQL-12",
+                    "Soup UI 22",
+                    "{{programName}}",
+                    "Jan23-CRUDInterfacingNinjas-SDET-20-2023051834699",
+                    "Jan23-APICoders-SDET-017-88",
+                    "13-NinjaSurvivors-SDET-7",
+                    "Jan23-APICoders-SDET-017-177",
+                    "Jan23-API-SDET-018-{{random}}",
+                    "Jan23-APICoders-SDET-017-363",
+                    "Emoty API  ",
+                    "EliteForce-SDET-001-Jan23",
+                    "Division"
+                ]
+            },
+            "programDescription": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "title": "The programDescription Schema",
+                "examples": [
+                    "Master PostgreSql2800",
+                    "API Automation Testing",
+                    "learn python",
+                    "Soup UI testing tool",
+                    "{{programDescription}}",
+                    "team20_postProgram",
+                    "Database Administration Program in 100 days 74",
+                    "LMS-Hackathon",
+                    "Learn and become an expert in PostgreSQL100 in 2 weeks 177",
+                    "Database Administration Program in 100 days",
+                    null,
+                    "API Hackathon Testing V1",
+                    "InTesting"
+                ]
+            },
+            "programStatus": {
+                "type": "string",
+                "title": "The programStatus Schema",
+                "examples": [
+                    "Active",
+                    "active",
+                    "{{programStatus}}",
+                    "InActive"
+                ]
+            },
+            "creationTime": {
+                "type": "string",
+                "title": "The creationTime Schema",
+                "examples": [
+                    "2023-01-13T20:12:34.302+00:00",
+                    "2023-01-14T00:00:47.000+00:00",
+                    "2023-01-14T00:08:30.000+00:00",
+                    "2023-01-14T00:08:32.000+00:00",
+                    "2023-01-14T00:04:32.000+00:00",
+                    "2023-01-14T03:55:34.343+00:00",
+                    "2023-01-14T02:28:13.791+00:00",
+                    "2023-01-13T19:37:35.588+00:00",
+                    "2023-01-13T23:34:16.800+00:00",
+                    "2023-01-14T10:37:26.583+00:00",
+                    "2023-01-13T17:35:38.967+00:00",
+                    "2023-01-10T01:13:00.000+00:00",
+                    "1970-01-20T08:53:48.689+00:00",
+                    "2023-01-14T11:17:23.691+00:00",
+                    "2023-01-11T22:53:24.413+00:00",
+                    "2023-01-11T22:22:32.000+00:00"
+                ]
+            },
+            "lastModTime": {
+                "type": "string",
+                "title": "The lastModTime Schema",
+                "examples": [
+                    "2023-01-13T20:12:34.302+00:00",
+                    "2023-01-14T00:00:47.000+00:00",
+                    "2023-01-14T00:08:30.000+00:00",
+                    "2023-01-14T00:08:32.000+00:00",
+                    "2023-01-14T00:04:32.000+00:00",
+                    "2023-01-14T03:55:34.343+00:00",
+                    "2023-01-14T02:28:13.791+00:00",
+                    "2023-01-13T19:37:35.588+00:00",
+                    "2023-01-13T23:34:16.801+00:00",
+                    "2023-01-14T10:37:26.583+00:00",
+                    "2023-01-13T17:35:38.967+00:00",
+                    "2023-01-10T05:13:00.000+00:00",
+                    "1970-01-20T08:53:48.689+00:00",
+                    "2023-01-14T11:17:23.691+00:00",
+                    "2023-01-11T22:53:24.413+00:00",
+                    "1970-01-20T08:51:24.431+00:00"
+                ]
+            }
+        },
+        "examples": [{
+            "programId": 920,
+            "programName": "Jan23-KP6",
+            "programDescription": "Master PostgreSql2800",
+            "programStatus": "Active",
+            "creationTime": "2023-01-13T20:12:34.302+00:00",
+            "lastModTime": "2023-01-13T20:12:34.302+00:00"
+        },
+        {
+            "programId": 323,
+            "programName": "camden.biz",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:00:47.000+00:00",
+            "lastModTime": "2023-01-14T00:00:47.000+00:00"
+        },
+        {
+            "programId": 2286,
+            "programName": "pghalle.net",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:08:30.000+00:00",
+            "lastModTime": "2023-01-14T00:08:30.000+00:00"
+        },
+        {
+            "programId": 2287,
+            "programName": "pgalysha.org",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:08:32.000+00:00",
+            "lastModTime": "2023-01-14T00:08:32.000+00:00"
+        },
+        {
+            "programId": 164,
+            "programName": "pgfrederique.org",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:04:32.000+00:00",
+            "lastModTime": "2023-01-14T00:04:32.000+00:00"
+        },
+        {
+            "programId": 2365,
+            "programName": "Jan23-NinjaTrainees-SQL-12",
+            "programDescription": "learn python",
+            "programStatus": "active",
+            "creationTime": "2023-01-14T03:55:34.343+00:00",
+            "lastModTime": "2023-01-14T03:55:34.343+00:00"
+        },
+        {
+            "programId": 2366,
+            "programName": "Soup UI 22",
+            "programDescription": "Soup UI testing tool",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T02:28:13.791+00:00",
+            "lastModTime": "2023-01-14T02:28:13.791+00:00"
+        },
+        {
+            "programId": 1736,
+            "programName": "{{programName}}",
+            "programDescription": "{{programDescription}}",
+            "programStatus": "{{programStatus}}",
+            "creationTime": "2023-01-13T19:37:35.588+00:00",
+            "lastModTime": "2023-01-13T19:37:35.588+00:00"
+        },
+        {
+            "programId": 1951,
+            "programName": "Jan23-CRUDInterfacingNinjas-SDET-20-2023051834699",
+            "programDescription": "team20_postProgram",
+            "programStatus": "InActive",
+            "creationTime": "2023-01-13T23:34:16.800+00:00",
+            "lastModTime": "2023-01-13T23:34:16.801+00:00"
+        },
+        {
+            "programId": 2441,
+            "programName": "Jan23-APICoders-SDET-017-88",
+            "programDescription": "Database Administration Program in 100 days 74",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T10:37:26.583+00:00",
+            "lastModTime": "2023-01-14T10:37:26.583+00:00"
+        },
+        {
+            "programId": 1954,
+            "programName": "13-NinjaSurvivors-SDET-7",
+            "programDescription": "LMS-Hackathon",
+            "programStatus": "Active",
+            "creationTime": "2023-01-13T17:35:38.967+00:00",
+            "lastModTime": "2023-01-13T17:35:38.967+00:00"
+        },
+        {
+            "programId": 2443,
+            "programName": "Jan23-APICoders-SDET-017-177",
+            "programDescription": "Learn and become an expert in PostgreSQL100 in 2 weeks 177",
+            "programStatus": "Active",
+            "creationTime": "2023-01-10T01:13:00.000+00:00",
+            "lastModTime": "2023-01-10T05:13:00.000+00:00"
+        },
+        {
+            "programId": 1604,
+            "programName": "Jan23-API-SDET-018-{{random}}",
+            "programDescription": "Database Administration Program in 100 days",
+            "programStatus": "Active",
+            "creationTime": "1970-01-20T08:53:48.689+00:00",
+            "lastModTime": "1970-01-20T08:53:48.689+00:00"
+        },
+        {
+            "programId": 2448,
+            "programName": "Jan23-APICoders-SDET-017-363",
+            "programDescription": "Database Administration Program in 100 days",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T11:17:23.691+00:00",
+            "lastModTime": "2023-01-14T11:17:23.691+00:00"
+        },
+        {
+            "programId": 1964,
+            "programName": "Emoty API  ",
+            "programDescription": null,
+            "programStatus": "Active",
+            "creationTime": "2023-01-11T22:53:24.413+00:00",
+            "lastModTime": "2023-01-11T22:53:24.413+00:00"
+        },
+        {
+            "programId": 908,
+            "programName": "EliteForce-SDET-001-Jan23",
+            "programDescription": "API Hackathon Testing V1",
+            "programStatus": "Active",
+            "creationTime": "2023-01-11T22:53:24.413+00:00",
+            "lastModTime": "2023-01-11T22:53:24.413+00:00"
+        },
+        {
+            "programId": 1959,
+            "programName": "Division",
+            "programDescription": "InTesting",
+            "programStatus": "InActive",
+            "creationTime": "2023-01-11T22:22:32.000+00:00",
+            "lastModTime": "1970-01-20T08:51:24.431+00:00"
+        }]
+    },
+    "examples": [
+        [{
+            "programId": 920,
+            "programName": "Jan23-KP6",
+            "programDescription": "Master PostgreSql2800",
+            "programStatus": "Active",
+            "creationTime": "2023-01-13T20:12:34.302+00:00",
+            "lastModTime": "2023-01-13T20:12:34.302+00:00"
+        },
+        {
+            "programId": 323,
+            "programName": "camden.biz",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:00:47.000+00:00",
+            "lastModTime": "2023-01-14T00:00:47.000+00:00"
+        },
+        {
+            "programId": 2286,
+            "programName": "pghalle.net",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:08:30.000+00:00",
+            "lastModTime": "2023-01-14T00:08:30.000+00:00"
+        },
+        {
+            "programId": 2287,
+            "programName": "pgalysha.org",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:08:32.000+00:00",
+            "lastModTime": "2023-01-14T00:08:32.000+00:00"
+        },
+        {
+            "programId": 164,
+            "programName": "pgfrederique.org",
+            "programDescription": "API Automation Testing",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T00:04:32.000+00:00",
+            "lastModTime": "2023-01-14T00:04:32.000+00:00"
+        },
+        {
+            "programId": 2365,
+            "programName": "Jan23-NinjaTrainees-SQL-12",
+            "programDescription": "learn python",
+            "programStatus": "active",
+            "creationTime": "2023-01-14T03:55:34.343+00:00",
+            "lastModTime": "2023-01-14T03:55:34.343+00:00"
+        },
+        {
+            "programId": 2366,
+            "programName": "Soup UI 22",
+            "programDescription": "Soup UI testing tool",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T02:28:13.791+00:00",
+            "lastModTime": "2023-01-14T02:28:13.791+00:00"
+        },
+        {
+            "programId": 1736,
+            "programName": "{{programName}}",
+            "programDescription": "{{programDescription}}",
+            "programStatus": "{{programStatus}}",
+            "creationTime": "2023-01-13T19:37:35.588+00:00",
+            "lastModTime": "2023-01-13T19:37:35.588+00:00"
+        },
+        {
+            "programId": 1951,
+            "programName": "Jan23-CRUDInterfacingNinjas-SDET-20-2023051834699",
+            "programDescription": "team20_postProgram",
+            "programStatus": "InActive",
+            "creationTime": "2023-01-13T23:34:16.800+00:00",
+            "lastModTime": "2023-01-13T23:34:16.801+00:00"
+        },
+        {
+            "programId": 2441,
+            "programName": "Jan23-APICoders-SDET-017-88",
+            "programDescription": "Database Administration Program in 100 days 74",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T10:37:26.583+00:00",
+            "lastModTime": "2023-01-14T10:37:26.583+00:00"
+        },
+        {
+            "programId": 1954,
+            "programName": "13-NinjaSurvivors-SDET-7",
+            "programDescription": "LMS-Hackathon",
+            "programStatus": "Active",
+            "creationTime": "2023-01-13T17:35:38.967+00:00",
+            "lastModTime": "2023-01-13T17:35:38.967+00:00"
+        },
+        {
+            "programId": 2443,
+            "programName": "Jan23-APICoders-SDET-017-177",
+            "programDescription": "Learn and become an expert in PostgreSQL100 in 2 weeks 177",
+            "programStatus": "Active",
+            "creationTime": "2023-01-10T01:13:00.000+00:00",
+            "lastModTime": "2023-01-10T05:13:00.000+00:00"
+        },
+        {
+            "programId": 1604,
+            "programName": "Jan23-API-SDET-018-{{random}}",
+            "programDescription": "Database Administration Program in 100 days",
+            "programStatus": "Active",
+            "creationTime": "1970-01-20T08:53:48.689+00:00",
+            "lastModTime": "1970-01-20T08:53:48.689+00:00"
+        },
+        {
+            "programId": 2448,
+            "programName": "Jan23-APICoders-SDET-017-363",
+            "programDescription": "Database Administration Program in 100 days",
+            "programStatus": "Active",
+            "creationTime": "2023-01-14T11:17:23.691+00:00",
+            "lastModTime": "2023-01-14T11:17:23.691+00:00"
+        },
+        {
+            "programId": 1964,
+            "programName": "Emoty API  ",
+            "programDescription": null,
+            "programStatus": "Active",
+            "creationTime": "2023-01-11T22:53:24.413+00:00",
+            "lastModTime": "2023-01-11T22:53:24.413+00:00"
+        },
+        {
+            "programId": 908,
+            "programName": "EliteForce-SDET-001-Jan23",
+            "programDescription": "API Hackathon Testing V1",
+            "programStatus": "Active",
+            "creationTime": "2023-01-11T22:53:24.413+00:00",
+            "lastModTime": "2023-01-11T22:53:24.413+00:00"
+        },
+        {
+            "programId": 1959,
+            "programName": "Division",
+            "programDescription": "InTesting",
+            "programStatus": "InActive",
+            "creationTime": "2023-01-11T22:22:32.000+00:00",
+            "lastModTime": "1970-01-20T08:51:24.431+00:00"
+        }]
+    ]
+}
