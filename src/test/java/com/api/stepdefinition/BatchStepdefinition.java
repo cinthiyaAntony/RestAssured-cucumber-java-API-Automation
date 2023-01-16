@@ -1,29 +1,30 @@
-package stepDefinitions;
+package com.api.stepdefinition;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItems;
-
 import org.json.simple.JSONObject;
-import org.junit.Assert;
+
+import com.api.base.TestBase;
+import com.api.utils.RestUtil;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utils.RestUtil;
 
-public class BatchSD {
+public class BatchStepdefinition extends TestBase{
+
+
 	Response response;
 	static Integer batchID;
 	static String batchNm;
@@ -36,51 +37,40 @@ public class BatchSD {
 	String NewprogramName = RestUtil.programName();
 	String programDescription = RestUtil.programDescription();
 	String dateAndTime = RestUtil.getDateTime();
-	
-	
+	String baseURL = prop.getProperty("baseurl");
+
 	@Given("A Service with LMS API")
 	public void a_Service_with_lms_API() {
 		
-		Properties prop;
-
-		try {
-			prop = new Properties();
-			FileInputStream fis = new FileInputStream("Configuration/config.properties");
-				prop.load(fis);
-				String baseURL = prop.getProperty("baseurl");
-				baseURI = baseURL;
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-			e.printStackTrace();
-		}		 
+		baseURI = baseURL;
+			
 	}
-	
+
 	@When("Get request to {string}")
 	public void get_request_to(String URI) {
-		
+
 		response = given().when().get(URI);
 	}
 
 
 	@When("Get request by batch ID to {string}")
 	public void get_request_by_batch_ID_to(String URI) {
-		
+
 		String path = URI +batchID ;
 		response = given().when().get(path);
 	}
-	
+
 	@When("Get request by batch name to {string}")
 	public void get_request_by_batch_name_to(String URI) {
-		
+
 		String path = URI +batchNm ;
 		response = given().when().get(path);
 	}
-	
+
 	@When("Get request by program ID to {string}")
 	public void get_request_by_program_ID_to(String URI) {
-		
-		String path = URI +programID ;
+
+		String path = URI + NewprogramID;
 		response = given().when().get(path);
 	}
 
@@ -88,34 +78,35 @@ public class BatchSD {
 	@Then("Validate response code {int}")
 	public void Validate_response_code(Integer statusCode) {
 
-	 response.then().assertThat().statusCode(statusCode).log().all();
-	 
+		response.then().assertThat().statusCode(statusCode).log().all();
+
 	}
-	
+
 	@Then("Validate batch Id is displayed as {int}")
 	public void Validate_batch_Id_is_displayed(Integer batchId) {
 
 		batchId = batchID;
-	 response.then().body("batchId",equalTo(batchId));
-	 
+		response.then().body("batchId",equalTo(batchId));
+
 	}
-	
+
 	@Then("Validate Program Id is displayed as {int}")
 	public void Validate_Program_Id_is_displayed(Integer programId) {
 
-		programId = programID;
-	 response.then().body("programId",hasItems(programId));
-	 
+
+		programId = NewprogramID;
+		response.then().body("programId",hasItems(programId));
+
 	}
-	
+
 	@Then("Validate batch Name is displayed as {string}")
 	public void Validate_batch_Name_is_displayed(String batchName) {
-		
+
 		batchName=batchNm;
-	 response.then().body("batchName",hasItems(batchName));
-	 
+		response.then().body("batchName",hasItems(batchName));
+
 	}
-	
+
 	@When("post request for program to {string}")
 	public void post_request_for_program_to(String URI) {
 
@@ -132,10 +123,10 @@ public class BatchSD {
 				accept(ContentType.JSON).
 				body(request.toJSONString()).
 				when().post(URI);
-		
+
 		programName = response.path("programName");
 		NewprogramID = response.path("programId");
-		System.out.println(dateAndTime);
+
 	}
 
 
@@ -156,17 +147,16 @@ public class BatchSD {
 				accept(ContentType.JSON).
 				body(request.toJSONString()).
 				when().post(URI);
-		
+
 		batchID = response.path("batchId");
 		batchNm = response.path("batchName");
-		programID = response.path("programId");
 	}
-	
-	
+
+
 	@When("put request to {string}")
 	public void put_request_to_batches_batchId(String URI) {
-		
-		String path = URI +batchID ;
+
+
 		JSONObject request = new JSONObject();
 
 		request.put("batchName",batchname);
@@ -176,20 +166,30 @@ public class BatchSD {
 		request.put("programId",NewprogramID);
 		request.put("programId",programName);
 
-
+		String path = URI +batchID ;
 		response = given().
 				contentType(ContentType.JSON).
 				accept(ContentType.JSON).
 				body(request.toJSONString()).
-				when().put(path);
+				when().patch(path);
 
 	}
 
 	@When("Delete request to {string}")
 	public void delete_request_to(String URI) {	
-		
+
 		String path = URI +batchID ;
 		response = when().
 				delete(path);
 	}
+
+	@When("Delete program request to {string}")
+	public void delete_program_request_to(String URI) {	
+
+		String path = URI +programName ;
+		response = when().
+				delete(path);
+	}
+
+
 }
