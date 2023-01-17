@@ -10,8 +10,7 @@ import com.api.base.TestBase;
 
 public class RestUtil extends TestBase {
 	
-	public static final String EXCEL ="C:/Users/joshi/eclipse-workspace/RestAssured-cucumber-java-API-Automation/src/test/java/com/api/testdata/DataExcel.xlsx";
-	//public static final String EXCEL = prop.getProperty("excel");
+	public static final String EXCEL ="./src/test/java/com/api/testdata/DataExcel.xlsx";
 
 	public static String batchName() {
 		return String.format("%s%s-%s-%s-%s", 
