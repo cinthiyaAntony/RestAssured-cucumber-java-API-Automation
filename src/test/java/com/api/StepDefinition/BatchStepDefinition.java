@@ -6,11 +6,6 @@ import static io.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-
 import org.json.simple.JSONObject;
 
 import com.api.base.TestBase;
@@ -202,7 +197,7 @@ public class BatchStepDefinition extends TestBase{
 		request.put("batchStatus","Active");
 		request.put("batchNoOfClasses",batchNoOfClasses);
 		request.put("programId",programID);
-		request.put("programId",programName);
+		request.put("programName",programName);
 
 		String path = URI +batchID ;
 		response = given().
