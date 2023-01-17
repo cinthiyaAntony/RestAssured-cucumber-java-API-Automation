@@ -17,8 +17,8 @@ Feature: Batch Requests
     Given A Service with LMS API
     When post request to create batch "/batches"
     Then Validate response code 201
-    
-      @CreateDuplicateBatch
+
+  @CreateDuplicateBatch
   Scenario: Cretae duplicate Batch
     Given A Service with LMS API
     When post request to create duplicate batch "/batches"
@@ -48,7 +48,7 @@ Feature: Batch Requests
   @UpdateBatchByID
   Scenario: Update Batch By Id
     Given A Service with LMS API
-    When put request to update batch data "/batches/batchId/"
+    When put request to update batch data "/batches/"
     Then Validate response code 200
 
   @DeleteBatchByID
@@ -56,8 +56,8 @@ Feature: Batch Requests
     Given A Service with LMS API
     When Delete batch request to "/batches/"
     Then Validate response code 200
-    
-    @DeleteSameBatchByID
+
+  @DeleteSameBatchByID
   Scenario: Delete Batch By already deleted  Id
     Given A Service with LMS API
     When Delete already deleted batch request to "/batches/"

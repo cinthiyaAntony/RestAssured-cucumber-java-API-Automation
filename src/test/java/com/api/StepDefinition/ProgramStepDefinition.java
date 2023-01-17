@@ -34,6 +34,7 @@ public class ProgramStepDefinition extends TestBase {
 	static int NewprogramID;
 	static String NewprogramName_1;
 	static int NewprogramID_1;
+	static String UpdatedProgramNm;
 	public RequestSpecification request;
 	int status;
 	JsonObject jsonObject;
@@ -70,9 +71,9 @@ public class ProgramStepDefinition extends TestBase {
 			// System.out.println("Successful Status Code" + StatusCodeUser);
 			jsonAsString = response.asString();
 			response.then().assertThat()
-					.body(JsonSchemaValidator
-							.matchesJsonSchema(new File("src/test/resources/JsonSchemaUser/allprogram.json")))
-					.log().all();
+			.body(JsonSchemaValidator
+					.matchesJsonSchema(new File("src/test/resources/JsonSchemaUser/allprogram.json")))
+			.log().all();
 			Assert.assertEquals(StatusCodeUser, 200);
 			log.info("Get validation code of GetAllProgram: 200");
 			// System.out.println("scenario 1 is sucess");
@@ -118,6 +119,9 @@ public class ProgramStepDefinition extends TestBase {
 			System.out.println(NewprogramName_1);
 		}
 		log.info("All required details send  ");
+
+		System.out.println("Program 1 " +NewprogramName);
+		System.out.println("Program 2 " +NewprogramName_1);
 	}
 
 	@Then("User should get status code {string}")
@@ -222,6 +226,7 @@ public class ProgramStepDefinition extends TestBase {
 		body.put("lastModTime", lastModTime);
 		response = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(body.toJSONString()).when()
 				.put(this.uri);
+
 	}
 
 	// UpdateByProgramName
@@ -233,17 +238,19 @@ public class ProgramStepDefinition extends TestBase {
 		log.info("PUT request with endpoint: " + this.uri);
 		final ExcelReader excelReader = new ExcelReader();
 		final List<Map<String, String>> putData = excelReader.getData(RestUtil.EXCEL, SheetName);
-		final String name = putData.get(Rownumber).get("programName");
+		//final String name = putData.get(Rownumber).get("programName");
 		final String description = putData.get(Rownumber).get("programDescription");
 		final String status = putData.get(Rownumber).get("programStatus");
 		JSONObject body = new JSONObject();
-		body.put("programName", name);
+		body.put("programName", progNa);
 		body.put("programDescription", description);
 		body.put("programStatus", status);
 		body.put("creationTime", currentTime);
 		body.put("lastModTime", lastModTime);
 		response = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(body.toJSONString()).when()
-				.put(this.uri);
+				.put(this.uri).then().log().all().extract().response();
+		
+		UpdatedProgramNm = response.path("programName");
 	}
 
 	@Then("User should get status code update validation {string}")
@@ -261,7 +268,7 @@ public class ProgramStepDefinition extends TestBase {
 		}
 	}
 
-//DeleteById
+	//DeleteById
 	@When("User sends Delete program by id {string}")
 	public void user_sends_Delete_program_by_id(String URI) {
 		this.uri = baseURL + URI + NewprogramID;
@@ -273,7 +280,7 @@ public class ProgramStepDefinition extends TestBase {
 	// DeleteByName
 	@When("User sends Delete program by Name {string}")
 	public void user_sends_Delete_program_by_Name(String URI) {
-		this.uri = baseURL + URI + NewprogramName_1;
+		this.uri = baseURL + URI + UpdatedProgramNm;
 		log.info("DELETE request with endpoint:" + this.uri);
 		response = when().delete(this.uri).then().extract().response();
 	}

@@ -4,13 +4,13 @@ import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
-import java.time.LocalDateTime;
-
-
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class RestUtil {
+import com.api.base.TestBase;
 
+public class RestUtil extends TestBase {
+	
+	public static final String EXCEL ="./src/test/java/com/api/testdata/DataExcel.xlsx";
 
 	public static String batchName() {
 		return String.format("%s%s-%s-%s-%s", 
@@ -44,7 +44,7 @@ public class RestUtil {
 		return (generateString);		
 	}
 
-	public static final String EXCEL = "C:/Users/cinth/eclipse-workspace/NinjaSparks_API_Hackathon/src/test/java/com/api/testdata/DataExcel.xlsx";
+	
 
 	public static String programNameForExcel() {
 		String generateString = RandomStringUtils.randomNumeric(10);

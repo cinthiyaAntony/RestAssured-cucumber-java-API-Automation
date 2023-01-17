@@ -40,28 +40,26 @@ Feature: Program Feature
     When User sends GET request for single Programid data
     Then User should get status code "200" for getProgramId and Name
 
-
   @UpdateProgramById
-  Scenario Outline: Get Batches By Program Id
-  Given User sets request with authorization
-  When User sends put request to "/putprogram/" and "<SheetName>" and <Rownumber>
-  Then User should get status code update validation "200"
-  
-  Examples:
-  | SheetName   | Rownumber |
-  | putdataId   |         0 |
-  
+  Scenario Outline: Update By Program Id
+    Given User sets request with authorization
+    When User sends put request to "/putprogram/" and "<SheetName>" and <Rownumber>
+    Then User should get status code update validation "200"
+
+    Examples: 
+      | SheetName | Rownumber |
+      | putdataId |         0|
+
   @UpdateProgramByName
-  Scenario Outline: Get Batches By Program Name
-  Given User sets request with authorization
-  When User sends put request to "/putprogram/" byName "<SheetName>" and <Rownumber>
-  Then User should get status code update validation "200"
-  
-  Examples:
-  | SheetName   | Rownumber |
-  | putdataName |         0 |
-  
-  
+  Scenario Outline: Update By Program Name
+    Given User sets request with authorization
+    When User sends put request to "/program/" byName "<SheetName>" and <Rownumber>
+    Then User should get status code update validation "200"
+
+    Examples: 
+      | SheetName   | Rownumber |
+      | putdataName |         0|
+
   @DeleteProgramById
   Scenario: Delete Program By Id
     Given User sets request with authorization
